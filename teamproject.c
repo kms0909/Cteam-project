@@ -5,77 +5,77 @@
 #include <string.h>
 #include <time.h>
 
-//»óÇ° Á¤º¸ ±¸Á¶Ã¼Ã¼
+//ìƒí’ˆ ì •ë³´ êµ¬ì¡°ì²´ì²´
 struct product {
     char name[20];
     int price;
 };
 
-// °í°´ Á¤º¸ ±¸Á¶Ã¼
+// ê³ ê° ì •ë³´ êµ¬ì¡°ì²´
 struct client {
-    char name[20]; // °í°´¸í
-    char adress[100];  // ÁÖ¼Ò
-    char phone[20]; // ÀüÈ­¹øÈ£
+    char name[20]; // ê³ ê°ëª…
+    char adress[100];  // ì£¼ì†Œ
+    char phone[20]; // ì „í™”ë²ˆí˜¸
 };
 
-// ÁÖ¹® Á¤º¸ ±¸Á¶Ã¼
+// ì£¼ë¬¸ ì •ë³´ êµ¬ì¡°ì²´
 struct order {
     int id;
-    char p_name[20]; // »óÇ°¸í
-    char cli_name[20]; // °í°´ ÀÌ¸§
-    char date[20]; // ÁÖ¹® ³¯Â¥
-    int quantity; // ¼ö·®
+    char p_name[20]; // ìƒí’ˆëª…
+    char cli_name[20]; // ê³ ê° ì´ë¦„
+    char date[20]; // ì£¼ë¬¸ ë‚ ì§œ
+    int quantity; // ìˆ˜ëŸ‰
 };
 
-//¸ñ·Ï
-struct product* Product_list = NULL; // »óÇ° ¸®½ºÆ® ¼±¾ğ
+//ëª©ë¡
+struct product* Product_list = NULL; // ìƒí’ˆ ë¦¬ìŠ¤íŠ¸ ì„ ì–¸
 int num_product = 0;
 
-struct client* Client_list = NULL; // °í°´ ¸®½ºÆ® ¼±¾ğ
+struct client* Client_list = NULL; // ê³ ê° ë¦¬ìŠ¤íŠ¸ ì„ ì–¸
 int num_client = 0;
 
-struct order* Order_list = NULL; // ÁÖ¹® ¸®½ºÆ® ¼±¾ğ
+struct order* Order_list = NULL; // ì£¼ë¬¸ ë¦¬ìŠ¤íŠ¸ ì„ ì–¸
 int num_order = 0;
 
 
-void replace_under(char*); //°ø¹éÀ» _·Î ¹Ù²Ù´Â ÇÔ¼ö
-void replace_space(char*); //_¸¦ °ø¹éÀ¸·Î ¹Ù²Ù´Â ÇÔ¼ö
-void product_search_print(int); //ºÎºĞ »óÇ° ¸ñ·Ï Ãâ·Â
-void clilent_search_print(int); //ºÎºĞ °í°´ ¸ñ·Ï Ãâ·Â
-void order_search_print(int); //ºÎºĞ ÁÖ¹® ¸ñ·Ï Ãâ·Â
-void load_list(); //¸®½ºÆ® ºÒ·¯¿À±â
-void save_list(int); //¸®½ºÆ® ÀúÀåÇÏ±â
-void product_add(); // »óÇ° Ãß°¡
-void product_mod(); // »óÇ° ¼öÁ¤
-void product_del(); // »óÇ° »èÁ¦
-void client_add(); //°í°´ Ãß°¡
-void client_mod(); //°í°´ ¼öÁ¤
-void client_del(); //°í°´ »èÁ¦
-void order_add(); // ÁÖ¹® Ãß°¡
-void order_mod(); // ÁÖ¹® ¼öÁ¤
-void order_del(); //ÁÖ¹® »èÁ¦
-void product_search_manage(); //»óÇ° °Ë»ö
-void client_search_manage(); //°í°´ °Ë»ö
-void order_search_manage(); // ÁÖ¹® °Ë»ö
-void list_print(int); //¸ñ·Ï Ãâ·Â
-void product_manage(); //»óÇ° Á¤º¸ ¸Ş´º
-void client_mange(); // °í°´ Á¤º¸ ¸Ş´º
-void order_manage(); // ÁÖ¹® Á¤º¸ ¸Ş´º
-void manage(); //ÅëÇÕ ¸Ş´º
-void search_manage(); //°Ë»ö ¸Ş´º
+void replace_under(char*); //ê³µë°±ì„ _ë¡œ ë°”ê¾¸ëŠ” í•¨ìˆ˜
+void replace_space(char*); //_ë¥¼ ê³µë°±ìœ¼ë¡œ ë°”ê¾¸ëŠ” í•¨ìˆ˜
+void product_search_print(int); //ë¶€ë¶„ ìƒí’ˆ ëª©ë¡ ì¶œë ¥
+void clilent_search_print(int); //ë¶€ë¶„ ê³ ê° ëª©ë¡ ì¶œë ¥
+void order_search_print(int); //ë¶€ë¶„ ì£¼ë¬¸ ëª©ë¡ ì¶œë ¥
+void load_list(); //ë¦¬ìŠ¤íŠ¸ ë¶ˆëŸ¬ì˜¤ê¸°
+void save_list(int); //ë¦¬ìŠ¤íŠ¸ ì €ì¥í•˜ê¸°
+void product_add(); // ìƒí’ˆ ì¶”ê°€
+void product_mod(); // ìƒí’ˆ ìˆ˜ì •
+void product_del(); // ìƒí’ˆ ì‚­ì œ
+void client_add(); //ê³ ê° ì¶”ê°€
+void client_mod(); //ê³ ê° ìˆ˜ì •
+void client_del(); //ê³ ê° ì‚­ì œ
+void order_add(); // ì£¼ë¬¸ ì¶”ê°€
+void order_mod(); // ì£¼ë¬¸ ìˆ˜ì •
+void order_del(); //ì£¼ë¬¸ ì‚­ì œ
+void product_search_manage(); //ìƒí’ˆ ê²€ìƒ‰
+void client_search_manage(); //ê³ ê° ê²€ìƒ‰
+void order_search_manage(); // ì£¼ë¬¸ ê²€ìƒ‰
+void list_print(int); //ëª©ë¡ ì¶œë ¥
+void product_manage(); //ìƒí’ˆ ì •ë³´ ë©”ë‰´
+void client_mange(); // ê³ ê° ì •ë³´ ë©”ë‰´
+void order_manage(); // ì£¼ë¬¸ ì •ë³´ ë©”ë‰´
+void manage(); //í†µí•© ë©”ë‰´
+void search_manage(); //ê²€ìƒ‰ ë©”ë‰´
 
 
 int main() {
-    // ÆÄÀÏ¿¡¼­ »óÇ° ¸ñ·ÏÀ» ÀĞ¾î¿È
+    // íŒŒì¼ì—ì„œ ìƒí’ˆ ëª©ë¡ì„ ì½ì–´ì˜´
     load_list();
 
-    // »óÇ° °ü¸® ¸Ş´º ½ÇÇà
+    // ìƒí’ˆ ê´€ë¦¬ ë©”ë‰´ ì‹¤í–‰
     manage();
 
-    // ÇÁ·Î±×·¥ Á¾·á Àü »óÇ° ¸ñ·ÏÀ» ÆÄÀÏ¿¡ ÀúÀå
+    // í”„ë¡œê·¸ë¨ ì¢…ë£Œ ì „ ìƒí’ˆ ëª©ë¡ì„ íŒŒì¼ì— ì €ì¥
     for (int i = 1; i <= 3; i++) save_list(i);
 
-    // µ¿Àû ¸Ş¸ğ¸® ÇØÁ¦
+    // ë™ì  ë©”ëª¨ë¦¬ í•´ì œ
     free(Product_list);
     free(Client_list);
     free(Order_list);
@@ -84,7 +84,7 @@ int main() {
 }
 
 
-//°ø¹éÀ» _·Î ¹Ù²Ù´Â ÇÔ¼ö
+//ê³µë°±ì„ _ë¡œ ë°”ê¾¸ëŠ” í•¨ìˆ˜
 void replace_under(char* str) {
     int len = strlen(str);
     for (int i = 0; i < len; i++) {
@@ -94,7 +94,7 @@ void replace_under(char* str) {
     }
 }
 
-//_¸¦ °ø¹éÀ¸·Î ¹Ù²Ù´Â ÇÔ¼ö
+//_ë¥¼ ê³µë°±ìœ¼ë¡œ ë°”ê¾¸ëŠ” í•¨ìˆ˜
 void replace_space(char* str) {
     int len = strlen(str);
     for (int i = 0; i < len; i++) {
@@ -105,90 +105,90 @@ void replace_space(char* str) {
 }
 
 void product_search_print(int i) {
-    printf("»óÇ°¸í: %s\n", Product_list[i].name);
-    printf("°¡°İ: %d\n", Product_list[i].price);
+    printf("ìƒí’ˆëª…: %s\n", Product_list[i].name);
+    printf("ê°€ê²©: %d\n", Product_list[i].price);
     printf("----------------------------\n");
 }
 
 void clilent_search_print(int i) {
 
-    printf("°í°´¸í: %s\n", Client_list[i].name);
-    printf("°í°´ ÁÖ¼Ò: %s\n", Client_list[i].adress);
-    printf("ÈŞ´ëÀüÈ­: %s\n", Client_list[i].phone);
+    printf("ê³ ê°ëª…: %s\n", Client_list[i].name);
+    printf("ê³ ê° ì£¼ì†Œ: %s\n", Client_list[i].adress);
+    printf("íœ´ëŒ€ì „í™”: %s\n", Client_list[i].phone);
     printf("----------------------------\n");
 }
 
 void order_search_print(int i) {
 
-    printf("ÁÖ¹® id: %d\n", Order_list[i].id);
-    printf("»óÇ°¸í: %s\n", Order_list[i].p_name);
-    printf("ÁÖ¹® ¼ö·®: %d\n", Order_list[i].quantity);
-    printf("ÁÖ¹®ÀÚ: %s\n", Order_list[i].cli_name);
-    printf("ÁÖ¹® ³¯Â¥: %s\n", Order_list[i].date);
+    printf("ì£¼ë¬¸ id: %d\n", Order_list[i].id);
+    printf("ìƒí’ˆëª…: %s\n", Order_list[i].p_name);
+    printf("ì£¼ë¬¸ ìˆ˜ëŸ‰: %d\n", Order_list[i].quantity);
+    printf("ì£¼ë¬¸ì: %s\n", Order_list[i].cli_name);
+    printf("ì£¼ë¬¸ ë‚ ì§œ: %s\n", Order_list[i].date);
     printf("----------------------------\n");
 
 }
 
 
-// ÆÄÀÏ¿¡¼­ »óÇ° ¸ñ·ÏÀ» ÀĞ¾î¿È
+// íŒŒì¼ì—ì„œ ìƒí’ˆ ëª©ë¡ì„ ì½ì–´ì˜´
 void load_list() {
 
     FILE* p_file;
     FILE* c_file;
     FILE* o_file;
 
-    //product ÆÄÀÏ ºÒ·¯¿À±â
+    //product íŒŒì¼ ë¶ˆëŸ¬ì˜¤ê¸°
     p_file = fopen("products.txt", "r");
     if (p_file == NULL) {
-        printf("»óÇ° ÆÄÀÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù.\n\n");
+        printf("ìƒí’ˆ íŒŒì¼ì„ ì—´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n\n");
         return;
     }
 
-    // »óÇ° ¼ö¸¦ ÆÄÀÏ¿¡¼­ ÀĞ¾î ¿È
+    // ìƒí’ˆ ìˆ˜ë¥¼ íŒŒì¼ì—ì„œ ì½ì–´ ì˜´
     fscanf(p_file, "%d", &num_product);
 
     Product_list = (struct product*)malloc(sizeof(struct product) * num_product);
 
-    // »óÇ° Á¤º¸¸¦ ÆÄÀÏ¿¡¼­ ÀĞ¾î ¿È
+    // ìƒí’ˆ ì •ë³´ë¥¼ íŒŒì¼ì—ì„œ ì½ì–´ ì˜´
     for (int i = 0; i < num_product; i++) {
         fscanf(p_file, "%s %d", Product_list[i].name, &(Product_list[i].price));
     }
     fclose(p_file);
 
 
-    //client ÆÄÀÏ ºÒ·¯¿À±â
+    //client íŒŒì¼ ë¶ˆëŸ¬ì˜¤ê¸°
     c_file = fopen("client.txt", "r");
     if (c_file == NULL) {
-        printf("°í°´ ÆÄÀÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù.\n");
+        printf("ê³ ê° íŒŒì¼ì„ ì—´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n");
         return;
     }
 
-    // °í°´ ¼ö¸¦ ÆÄÀÏ¿¡¼­ ÀĞ¾î ¿È
+    // ê³ ê° ìˆ˜ë¥¼ íŒŒì¼ì—ì„œ ì½ì–´ ì˜´
     fscanf(c_file, "%d", &num_client);
 
     Client_list = (struct client*)malloc(sizeof(struct client) * num_client);
 
-    // °í°´ Á¤º¸¸¦ ÆÄÀÏ¿¡¼­ ÀĞ¾î ¿È
+    // ê³ ê° ì •ë³´ë¥¼ íŒŒì¼ì—ì„œ ì½ì–´ ì˜´
     for (int i = 0; i < num_client; i++) {
-        replace_under(Client_list[i].adress); //ÁÖ¼Ò ¹Ğ¸² ¹æÁö
+        replace_under(Client_list[i].adress); //ì£¼ì†Œ ë°€ë¦¼ ë°©ì§€
         fscanf(c_file, "%s %s %s", Client_list[i].name, Client_list[i].adress, Client_list[i].phone);
     }
     fclose(c_file);
 
 
-    //order ÆÄÀÏ ºÒ·¯¿À±â
+    //order íŒŒì¼ ë¶ˆëŸ¬ì˜¤ê¸°
     o_file = fopen("order.txt", "r");
     if (o_file == NULL) {
-        printf("»óÇ° ÆÄÀÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù.\n\n");
+        printf("ìƒí’ˆ íŒŒì¼ì„ ì—´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n\n");
         return;
     }
 
-    // ÁÖ¹® ¼ö¸¦ ÆÄÀÏ¿¡¼­ ÀĞ¾î ¿È
+    // ì£¼ë¬¸ ìˆ˜ë¥¼ íŒŒì¼ì—ì„œ ì½ì–´ ì˜´
     fscanf(o_file, "%d", &num_order);
 
     Order_list = (struct order*)malloc(sizeof(struct order) * num_order);
 
-    // ÁÖ¹® Á¤º¸¸¦ ÆÄÀÏ¿¡¼­ ÀĞ¾î ¿È
+    // ì£¼ë¬¸ ì •ë³´ë¥¼ íŒŒì¼ì—ì„œ ì½ì–´ ì˜´
     for (int i = 0; i < num_order; i++) {
         fscanf(o_file, "%d %s %s %s %d", &(Order_list[i].id), Order_list[i].p_name, Order_list[i].cli_name, Order_list[i].date, &(Order_list[i].quantity));
     }
@@ -196,9 +196,9 @@ void load_list() {
 
 }
 
-// »óÇ° ¸ñ·ÏÀ» ÆÄÀÏ¿¡ ÀúÀå
+// ìƒí’ˆ ëª©ë¡ì„ íŒŒì¼ì— ì €ì¥
 void save_list(int num) {
-    // »óÇ° ¸ñ·ÏÀ» ÀúÀåÇÒ ÆÄÀÏ ÀÌ¸§
+    // ìƒí’ˆ ëª©ë¡ì„ ì €ì¥í•  íŒŒì¼ ì´ë¦„
 
     FILE* p_file = NULL;
     FILE* c_file = NULL;
@@ -210,17 +210,17 @@ void save_list(int num) {
     case 1:
         p_file = fopen("products.txt", "w");
         if (p_file == NULL) {
-            printf("»óÇ° ÆÄÀÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù.\n");
+            printf("ìƒí’ˆ íŒŒì¼ì„ ì—´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n");
             fclose(p_file);
             fclose(c_file);
             fclose(o_file);
             return;
         }
 
-        // »óÇ° ¼ö¸¦ ÆÄÀÏ¿¡ ¾¸
+        // ìƒí’ˆ ìˆ˜ë¥¼ íŒŒì¼ì— ì”€
         fprintf(p_file, "%d\n", num_product);
 
-        // »óÇ° Á¤º¸¸¦ ÆÄÀÏ¿¡ ¾¸
+        // ìƒí’ˆ ì •ë³´ë¥¼ íŒŒì¼ì— ì”€
         for (int i = 0; i < num_product; i++) {
             fprintf(p_file, "%s %d\n", Product_list[i].name, Product_list[i].price);
         }
@@ -229,17 +229,17 @@ void save_list(int num) {
     case 2:
         c_file = fopen("client.txt", "w");
         if (c_file == NULL) {
-            printf("°í°´ ÆÄÀÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù.\n");
+            printf("ê³ ê° íŒŒì¼ì„ ì—´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n");
             fclose(p_file);
             fclose(c_file);
             fclose(o_file);
             return;
         }
 
-        // °í°´ Á¤º¸¸¦ ÆÄÀÏ¿¡ ¾¸
+        // ê³ ê° ì •ë³´ë¥¼ íŒŒì¼ì— ì”€
         fprintf(c_file, "%d\n", num_client);
 
-        // °í°´ Á¤º¸¸¦ ÆÄÀÏ¿¡ ¾¸
+        // ê³ ê° ì •ë³´ë¥¼ íŒŒì¼ì— ì”€
         for (int i = 0; i < num_client; i++) {
             fprintf(c_file, "%s %s %s\n", Client_list[i].name, Client_list[i].adress, Client_list[i].phone);
             replace_space(Client_list[i].adress);
@@ -250,24 +250,24 @@ void save_list(int num) {
     case 3:
         o_file = fopen("order.txt", "w");
         if (o_file == NULL) {
-            printf(" ÆÄÀÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù.\n");
+            printf(" íŒŒì¼ì„ ì—´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n");
             fclose(p_file);
             fclose(c_file);
             fclose(o_file);
             return;
         }
 
-        // ÁÖ¹® Á¤º¸¸¦ ÆÄÀÏ¿¡ ¾¸
+        // ì£¼ë¬¸ ì •ë³´ë¥¼ íŒŒì¼ì— ì”€
         fprintf(o_file, "%d\n", num_order);
 
-        // °í°´ Á¤º¸¸¦ ÆÄÀÏ¿¡ ¾¸
+        // ê³ ê° ì •ë³´ë¥¼ íŒŒì¼ì— ì”€
         for (int i = 0; i < num_order; i++) {
             fprintf(o_file, "%d %s %s %s %d\n", Order_list[i].id, Order_list[i].p_name, Order_list[i].cli_name, Order_list[i].date, Order_list[i].quantity);
         }
         return;
 
     default:
-        printf("¼ö¸¦ Àß¸øÀÔ·ÂÇÏ¼Ì½À´Ï´Ù.\n");
+        printf("ìˆ˜ë¥¼ ì˜ëª»ì…ë ¥í•˜ì…¨ìŠµë‹ˆë‹¤.\n");
         return;
 
     }
@@ -276,39 +276,39 @@ void save_list(int num) {
     fclose(o_file);
 }
 
-// »óÇ° Ãß°¡
+// ìƒí’ˆ ì¶”ê°€
 void product_add() {
     struct product new_product;
 
-    printf("»óÇ° Ãß°¡\n\n");
-    printf("»óÇ°¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä: ");
+    printf("ìƒí’ˆ ì¶”ê°€\n\n");
+    printf("ìƒí’ˆëª…ì„ ì…ë ¥í•´ì£¼ì„¸ìš”: ");
     scanf("%s", new_product.name);
 
-    printf("°¡°İÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä: ");
+    printf("ê°€ê²©ì„ ì…ë ¥í•´ì£¼ì„¸ìš”: ");
     scanf("%d", &(new_product.price));
 
-    // »óÇ° ¸ñ·Ï¿¡ Ãß°¡
+    // ìƒí’ˆ ëª©ë¡ì— ì¶”ê°€
     num_product++;
     Product_list = (struct product*)realloc(Product_list, sizeof(struct product) * num_product);
     if (Product_list == NULL) {
-        printf("»óÇ° ÆÄÀÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù.\n");
+        printf("ìƒí’ˆ íŒŒì¼ì„ ì—´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n");
         return;
     }
     Product_list[num_product - 1] = new_product;
 
-    printf("»óÇ°ÀÌ Ãß°¡µÇ¾ú½À´Ï´Ù.\n\n");
+    printf("ìƒí’ˆì´ ì¶”ê°€ë˜ì—ˆìŠµë‹ˆë‹¤.\n\n");
 
-    // º¯°æµÈ »óÇ° ¸ñ·ÏÀ» ÆÄÀÏ¿¡ ÀúÀå
+    // ë³€ê²½ëœ ìƒí’ˆ ëª©ë¡ì„ íŒŒì¼ì— ì €ì¥
     save_list(1);
 }
 
-//»óÇ° ¼öÁ¤
+//ìƒí’ˆ ìˆ˜ì •
 void product_mod() {
     char product_name[20];
     int select, a = 0, found = 0;
 
-    printf("»óÇ° ¼öÁ¤ \n");
-    printf("¼öÁ¤ÇÒ »óÇ°¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä: ");
+    printf("ìƒí’ˆ ìˆ˜ì • \n");
+    printf("ìˆ˜ì •í•  ìƒí’ˆëª…ì„ ì…ë ¥í•´ì£¼ì„¸ìš”: ");
     scanf("%s", product_name);
 
     for (int i = 0; i < num_product; i++) {
@@ -317,36 +317,36 @@ void product_mod() {
 
             while (a == 0) {
 
-                printf("1. »óÇ°¸í\n");
-                printf("2. »óÇ°Àç°í\n");
-                printf("3. ÀüºÎ ¼öÁ¤\n");
-                printf("¼öÁ¤ÇÒ ºÎºĞÀ» ¼±ÅÃÇØÁÖ¼¼¿ä: \n");
+                printf("1. ìƒí’ˆëª…\n");
+                printf("2. ìƒí’ˆì¬ê³ \n");
+                printf("3. ì „ë¶€ ìˆ˜ì •\n");
+                printf("ìˆ˜ì •í•  ë¶€ë¶„ì„ ì„ íƒí•´ì£¼ì„¸ìš”: \n");
                 scanf("%d", &select);
 
                 switch (select) {
 
                 case 1:
-                    printf("»óÇ°¸íÀ» ¼öÁ¤ÇØÁÖ¼¼¿ä: ");
+                    printf("ìƒí’ˆëª…ì„ ìˆ˜ì •í•´ì£¼ì„¸ìš”: ");
                     scanf("%s", Product_list[i].name);
                     a = 1;
                     break;
 
                 case 2:
-                    printf("»óÇ° Àç°í¸¦ ¼öÁ¤ÇØÁÖ¼¼¿ä: ");
+                    printf("ìƒí’ˆ ì¬ê³ ë¥¼ ìˆ˜ì •í•´ì£¼ì„¸ìš”: ");
                     scanf("%d", &(Product_list[i].price));
                     a = 1;
                     break;
 
                 case 3:
-                    printf("»óÇ°¸íÀ» ¼öÁ¤ÇØÁÖ¼¼¿ä: ");
+                    printf("ìƒí’ˆëª…ì„ ìˆ˜ì •í•´ì£¼ì„¸ìš”: ");
                     scanf("%s", Product_list[i].name);
-                    printf("»óÇ° Àç°í¸¦ ¼öÁ¤ÇØÁÖ¼¼¿ä: ");
+                    printf("ìƒí’ˆ ì¬ê³ ë¥¼ ìˆ˜ì •í•´ì£¼ì„¸ìš”: ");
                     scanf("%d", &(Product_list[i].price));
                     a = 1;
                     break;
 
                 default:
-                    printf("¸Ş´º¿¡ ¾ø´Â ¹øÈ£ ÀÔ´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.\n");
+                    printf("ë©”ë‰´ì— ì—†ëŠ” ë²ˆí˜¸ ì…ë‹ˆë‹¤. ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”.\n");
                 }
                 if (a == 1) break;
             }
@@ -354,22 +354,22 @@ void product_mod() {
         }
     }
     if (!found) {
-        printf("»óÇ°À» Ã£À» ¼ö ¾ø½À´Ï´Ù.\n\n");
+        printf("ìƒí’ˆì„ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n\n");
     }
     save_list(1);
 }
 
-// »óÇ° »èÁ¦
+// ìƒí’ˆ ì‚­ì œ
 void product_del() {
 
 
     if (num_product == 0) {
-        printf("»èÁ¦ÇÒ »óÇ°ÀÌ ¾ø½À´Ï´Ù.\n\n");
+        printf("ì‚­ì œí•  ìƒí’ˆì´ ì—†ìŠµë‹ˆë‹¤.\n\n");
         return;
     }
 
-    printf("»óÇ° »èÁ¦\n");
-    printf("»èÁ¦ÇÒ »óÇ°¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä: ");
+    printf("ìƒí’ˆ ì‚­ì œ\n");
+    printf("ì‚­ì œí•  ìƒí’ˆëª…ì„ ì…ë ¥í•´ì£¼ì„¸ìš”: ");
     char product_name[20];
     scanf("%s", product_name);
 
@@ -378,7 +378,7 @@ void product_del() {
         if (strcmp(Product_list[i].name, product_name) == 0) {
             found = 1;
 
-            // »èÁ¦ÇÒ »óÇ° ÀÌÈÄÀÇ »óÇ°µéÀ» ÇÑ Ä­¾¿ ¾ÕÀ¸·Î ÀÌµ¿
+            // ì‚­ì œí•  ìƒí’ˆ ì´í›„ì˜ ìƒí’ˆë“¤ì„ í•œ ì¹¸ì”© ì•ìœ¼ë¡œ ì´ë™
 
             for (int j = i; j < num_product - 1; j++) {
                 Product_list[j] = Product_list[j + 1];
@@ -386,65 +386,65 @@ void product_del() {
             num_product--;
             Product_list = (struct product*)realloc(Product_list, sizeof(struct product) * num_product);
             if (Product_list == NULL) {
-                printf("product_list¿¡ ¸Ş¸ğ¸® ÀçÇÒ´çÀ» ½ÇÆĞ ÇÏ¿´½À´Ï´Ù.");
+                printf("product_listì— ë©”ëª¨ë¦¬ ì¬í• ë‹¹ì„ ì‹¤íŒ¨ í•˜ì˜€ìŠµë‹ˆë‹¤.");
                 free(Product_list);
                 exit(1);
             }
-            printf("»óÇ°ÀÌ »èÁ¦µÇ¾ú½À´Ï´Ù.\n\n");
+            printf("ìƒí’ˆì´ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.\n\n");
             break;
         }
     }
 
     if (!found) {
-        printf("»óÇ°À» Ã£À» ¼ö ¾ø½À´Ï´Ù.\n\n");
+        printf("ìƒí’ˆì„ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n\n");
     }
 
-    // º¯°æµÈ »óÇ° ¸ñ·ÏÀ» ÆÄÀÏ¿¡ ÀúÀå
+    // ë³€ê²½ëœ ìƒí’ˆ ëª©ë¡ì„ íŒŒì¼ì— ì €ì¥
     save_list(1);
 }
 
-//°í°´ Á¤º¸ Ãß°¡
+//ê³ ê° ì •ë³´ ì¶”ê°€
 void client_add() {
     struct client new_client;
 
-    printf("°í°´ Á¤º¸ Ãß°¡\n");
-    printf("°í°´´ÔÀÇ ¼ºÇÔÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä: ");
+    printf("ê³ ê° ì •ë³´ ì¶”ê°€\n");
+    printf("ê³ ê°ë‹˜ì˜ ì„±í•¨ì„ ì…ë ¥í•´ì£¼ì„¸ìš”: ");
     scanf("%s", new_client.name);
-    while (getchar() != '\n'); //\n Á¦°Å
+    while (getchar() != '\n'); //\n ì œê±°
 
 
-    printf("°í°´´ÔÀÇ ÁÖ¼Ò¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä: ");
+    printf("ê³ ê°ë‹˜ì˜ ì£¼ì†Œë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”: ");
     fgets(new_client.adress, sizeof(new_client.adress), stdin);
-    new_client.adress[strcspn(new_client.adress, "\n")] = '\0'; //fgetsÇÔ¼ö¸¦ »ç¿ëÇØ¼­ °°ÀÌ ¹Ş¾ÆÁø \nÀ» Á¦°Å
+    new_client.adress[strcspn(new_client.adress, "\n")] = '\0'; //fgetsí•¨ìˆ˜ë¥¼ ì‚¬ìš©í•´ì„œ ê°™ì´ ë°›ì•„ì§„ \nì„ ì œê±°
     replace_under(new_client.adress);
 
 
-    printf("°í°´´ÔÀÇ ÀüÈ­¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä: ");
+    printf("ê³ ê°ë‹˜ì˜ ì „í™”ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”: ");
     scanf("%s", new_client.phone);
     while (getchar() != '\n');
 
-    //°í°´ Á¤º¸ Ãß°¡
+    //ê³ ê° ì •ë³´ ì¶”ê°€
     num_client++;
     Client_list = (struct client*)realloc(Client_list, sizeof(struct client) * num_client);
     if (Client_list == NULL) {
-        printf("°í°´ ÆÄÀÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù.\n");
+        printf("ê³ ê° íŒŒì¼ì„ ì—´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n");
         return;
     }
     Client_list[num_client - 1] = new_client;
 
-    printf("°í°´´ÔÀÇ Á¤º¸°¡ Ãß°¡µÇ¾ú½À´Ï´Ù.\n");
+    printf("ê³ ê°ë‹˜ì˜ ì •ë³´ê°€ ì¶”ê°€ë˜ì—ˆìŠµë‹ˆë‹¤.\n");
 
-    //°í°´ Á¤º¸ ¸ñ·ÏÀ» ÆÄÀÏ¿¡ ÀúÀå
+    //ê³ ê° ì •ë³´ ëª©ë¡ì„ íŒŒì¼ì— ì €ì¥
     save_list(2);
 }
 
-//°í°´ Á¤º¸ ¼öÁ¤
+//ê³ ê° ì •ë³´ ìˆ˜ì •
 void client_mod() {
     char client_name[20];
     int c_select, b = 0, c_found = 0;
 
-    printf("»óÇ° ¼öÁ¤ \n");
-    printf("¼öÁ¤ÇÒ °í°´¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä: ");
+    printf("ìƒí’ˆ ìˆ˜ì • \n");
+    printf("ìˆ˜ì •í•  ê³ ê°ëª…ì„ ì…ë ¥í•´ì£¼ì„¸ìš”: ");
     scanf("%s", client_name);
 
     for (int i = 0; i < num_client; i++) {
@@ -453,55 +453,55 @@ void client_mod() {
 
             while (b == 0) {
 
-                printf("\n1. °í°´¸í\n");
-                printf("2. ÁÖ¼Ò\n");
-                printf("3. ÀüÈ­¹øÈ£\n");
-                printf("4. ÀüºÎ ¼öÁ¤\n");
-                printf("¼öÁ¤ÇÒ ºÎºĞÀ» ¼±ÅÃÇØÁÖ¼¼¿ä:");
+                printf("\n1. ê³ ê°ëª…\n");
+                printf("2. ì£¼ì†Œ\n");
+                printf("3. ì „í™”ë²ˆí˜¸\n");
+                printf("4. ì „ë¶€ ìˆ˜ì •\n");
+                printf("ìˆ˜ì •í•  ë¶€ë¶„ì„ ì„ íƒí•´ì£¼ì„¸ìš”:");
                 scanf("%d", &c_select);
                 while (getchar() != '\n');
 
                 switch (c_select) {
 
                 case 1:
-                    printf("\n°í°´´ÔÀÇ ¼ºÇÔÀ» ¼öÁ¤ÇØÁÖ¼¼¿ä: ");
+                    printf("\nê³ ê°ë‹˜ì˜ ì„±í•¨ì„ ìˆ˜ì •í•´ì£¼ì„¸ìš”: ");
                     scanf("%s", Client_list[i].name);
                     while (getchar() != '\n');
                     b = 1;
                     break;
 
                 case 2:
-                    printf("\n°í°´´ÔÀÇ ÁÖ¼Ò¸¦ ¼öÁ¤ÇØÁÖ¼¼¿ä: ");
+                    printf("\nê³ ê°ë‹˜ì˜ ì£¼ì†Œë¥¼ ìˆ˜ì •í•´ì£¼ì„¸ìš”: ");
                     fgets(Client_list[i].adress, sizeof(Client_list[i].adress), stdin);
-                    Client_list[i].adress[strcspn(Client_list[i].adress, "\n")] = '\0'; //fgetsÇÔ¼ö¸¦ »ç¿ëÇØ¼­ °°ÀÌ ¹Ş¾ÆÁø \nÀ» Á¦°Å
+                    Client_list[i].adress[strcspn(Client_list[i].adress, "\n")] = '\0'; //fgetsí•¨ìˆ˜ë¥¼ ì‚¬ìš©í•´ì„œ ê°™ì´ ë°›ì•„ì§„ \nì„ ì œê±°
                     replace_under(Client_list[i].adress);
                     b = 1;
                     break;
 
                 case 3:
-                    printf("\n°í°´´ÔÀÇ ÀüÈ­¹øÈ£¸¦ ¼öÁ¤ÇØÁÖ¼¼¿ä: ");
+                    printf("\nê³ ê°ë‹˜ì˜ ì „í™”ë²ˆí˜¸ë¥¼ ìˆ˜ì •í•´ì£¼ì„¸ìš”: ");
                     scanf("%s", Client_list[i].phone);
                     while (getchar() != '\n');
                     b = 1;
                     break;
                 case 4:
-                    printf("\n°í°´´ÔÀÇ ¼ºÇÔÀ» ¼öÁ¤ÇØÁÖ¼¼¿ä: ");
+                    printf("\nê³ ê°ë‹˜ì˜ ì„±í•¨ì„ ìˆ˜ì •í•´ì£¼ì„¸ìš”: ");
                     scanf("%s", Client_list[i].name);
                     while (getchar() != '\n');
 
-                    printf("\n°í°´´ÔÀÇ ÁÖ¼Ò¸¦ ¼öÁ¤ÇØÁÖ¼¼¿ä: ");
+                    printf("\nê³ ê°ë‹˜ì˜ ì£¼ì†Œë¥¼ ìˆ˜ì •í•´ì£¼ì„¸ìš”: ");
                     fgets(Client_list[i].adress, sizeof(Client_list[i].adress), stdin);
-                    Client_list[i].adress[strcspn(Client_list[i].adress, "\n")] = '\0'; //fgetsÇÔ¼ö¸¦ »ç¿ëÇØ¼­ °°ÀÌ ¹Ş¾ÆÁø \nÀ» Á¦°Å
+                    Client_list[i].adress[strcspn(Client_list[i].adress, "\n")] = '\0'; //fgetsí•¨ìˆ˜ë¥¼ ì‚¬ìš©í•´ì„œ ê°™ì´ ë°›ì•„ì§„ \nì„ ì œê±°
                     replace_under(Client_list[i].adress);
 
-                    printf("\n°í°´´ÔÀÇ ÀüÈ­¹øÈ£¸¦ ¼öÁ¤ÇØÁÖ¼¼¿ä: ");
+                    printf("\nê³ ê°ë‹˜ì˜ ì „í™”ë²ˆí˜¸ë¥¼ ìˆ˜ì •í•´ì£¼ì„¸ìš”: ");
                     scanf("%s", Client_list[i].phone);
                     while (getchar() != '\n');
                     b = 1;
                     break;
 
                 default:
-                    printf("\n¸Ş´º¿¡ ¾ø´Â ¹øÈ£ ÀÔ´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.\n");
+                    printf("\në©”ë‰´ì— ì—†ëŠ” ë²ˆí˜¸ ì…ë‹ˆë‹¤. ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”.\n");
                 }
                 if (b == 1) break;
             }
@@ -509,23 +509,23 @@ void client_mod() {
         }
     }
     if (!c_found) {
-        printf("°í°´´ÔÀÇ Á¤º¸¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù.\n\n");
+        printf("ê³ ê°ë‹˜ì˜ ì •ë³´ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n\n");
     }
     save_list(2);
 }
 
-// °í°´ Á¤º¸ »èÁ¦
+// ê³ ê° ì •ë³´ ì‚­ì œ
 void client_del() {
 
     int num = 1;
 
     if (num_client == 0) {
-        printf("»èÁ¦ÇÒ °í°´ÀÌ ¾ø½À´Ï´Ù.\n\n");
+        printf("ì‚­ì œí•  ê³ ê°ì´ ì—†ìŠµë‹ˆë‹¤.\n\n");
         return;
     }
 
-    printf("°í°´ »èÁ¦\n");
-    printf("»èÁ¦ÇÒ °í°´¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä: ");
+    printf("ê³ ê° ì‚­ì œ\n");
+    printf("ì‚­ì œí•  ê³ ê°ëª…ì„ ì…ë ¥í•´ì£¼ì„¸ìš”: ");
     char client_name[20];
     scanf("%s", client_name);
 
@@ -534,7 +534,7 @@ void client_del() {
         if (strcmp(Client_list[i].name, client_name) == 0) {
             found = 1;
 
-            // »èÁ¦ÇÒ °í°´ ÀÌÈÄÀÇ °í°´µéÀ» ÇÑ Ä­¾¿ ¾ÕÀ¸·Î ÀÌµ¿
+            // ì‚­ì œí•  ê³ ê° ì´í›„ì˜ ê³ ê°ë“¤ì„ í•œ ì¹¸ì”© ì•ìœ¼ë¡œ ì´ë™
 
             for (int j = i; j < num_client - 1; j++) {
                 Client_list[j] = Client_list[j + 1];
@@ -542,40 +542,40 @@ void client_del() {
             num_client--;
             Client_list = (struct client*)realloc(Client_list, sizeof(struct client) * num_client);
             if (Client_list == NULL) {
-                printf("client_list¿¡ ¸Ş¸ğ¸® ÀçÇÒ´çÀ» ½ÇÆĞ ÇÏ¿´½À´Ï´Ù.");
+                printf("client_listì— ë©”ëª¨ë¦¬ ì¬í• ë‹¹ì„ ì‹¤íŒ¨ í•˜ì˜€ìŠµë‹ˆë‹¤.");
                 free(Client_list);
                 exit(1);
             }
-            printf("°í°´ÀÌ »èÁ¦µÇ¾ú½À´Ï´Ù.\n\n");
+            printf("ê³ ê°ì´ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.\n\n");
             break;
         }
     }
 
     if (!found) {
-        printf("°í°´À» Ã£À» ¼ö ¾ø½À´Ï´Ù.\n\n");
+        printf("ê³ ê°ì„ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n\n");
     }
     save_list(2);
 }
 
-// ÁÖ¹® Á¤º¸ Ãß°¡
+// ì£¼ë¬¸ ì •ë³´ ì¶”ê°€
 void order_add() {
     struct order new_order;
     srand(time(NULL));
 
-    printf("\n»óÇ°¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä: ");
+    printf("\nìƒí’ˆëª…ì„ ì…ë ¥í•´ì£¼ì„¸ìš”: ");
     scanf("%s", new_order.p_name);
 
-    printf("\nÁÖ¹®ÀÚ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä: ");
+    printf("\nì£¼ë¬¸ìë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”: ");
     scanf("%s", new_order.cli_name);
 
-    printf("\n¼ö·®À» ÀÔ·ÂÇØÁÖ¼¼¿ä: ");
+    printf("\nìˆ˜ëŸ‰ì„ ì…ë ¥í•´ì£¼ì„¸ìš”: ");
     scanf("%d", &(new_order.quantity));
 
-    printf("\nÁÖ¹®id´Â ·£´ıÀ¸·Î Ãß°¡µË´Ï´Ù.\n");
+    printf("\nì£¼ë¬¸idëŠ” ëœë¤ìœ¼ë¡œ ì¶”ê°€ë©ë‹ˆë‹¤.\n");
     new_order.id = rand() % 10000000;
 
-    printf("ÁÖ¹® ³¯Â¥´Â ÇöÀç ³¯Â¥·Î Ãß°¡µË´Ï´Ù.\n ");
-    //ÁÖ¹® ³¯Â¥
+    printf("ì£¼ë¬¸ ë‚ ì§œëŠ” í˜„ì¬ ë‚ ì§œë¡œ ì¶”ê°€ë©ë‹ˆë‹¤.\n ");
+    //ì£¼ë¬¸ ë‚ ì§œ
     time_t currentTime;
     time(&currentTime);
     struct tm* timeInfo = localtime(&currentTime);
@@ -583,28 +583,28 @@ void order_add() {
     strftime(timeString, sizeof(timeString), "%Y/%m/%d", timeInfo);
     strcpy(new_order.date, timeString);
 
-    // »óÇ° ¸ñ·Ï¿¡ Ãß°¡
+    // ìƒí’ˆ ëª©ë¡ì— ì¶”ê°€
     num_order++;
     Order_list = (struct order*)realloc(Order_list, sizeof(struct order) * num_order);
     if (Order_list == NULL) {
-        printf("\nÁÖ¹® ÆÄÀÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù.\n");
+        printf("\nì£¼ë¬¸ íŒŒì¼ì„ ì—´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n");
         return;
     }
     Order_list[num_order - 1] = new_order;
 
-    printf("\nÁÖ¹®ÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.\n\n");
+    printf("\nì£¼ë¬¸ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.\n\n");
 
-    // º¯°æµÈ »óÇ° ¸ñ·ÏÀ» ÆÄÀÏ¿¡ ÀúÀå
+    // ë³€ê²½ëœ ìƒí’ˆ ëª©ë¡ì„ íŒŒì¼ì— ì €ì¥
     save_list(3);
 }
 
-//ÁÖ¹® Á¤º¸ ¼öÁ¤
+//ì£¼ë¬¸ ì •ë³´ ìˆ˜ì •
 void order_mod() {
     char order_name[20];
     int select, a = 0, found = 0;
 
-    printf("ÁÖ¹® ¼öÁ¤ \n");
-    printf("¼öÁ¤ÇÒ idÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä: ");
+    printf("ì£¼ë¬¸ ìˆ˜ì • \n");
+    printf("ìˆ˜ì •í•  idì„ ì…ë ¥í•´ì£¼ì„¸ìš”: ");
     scanf("%s", order_name);
 
     for (int i = 0; i < num_order; i++) {
@@ -613,41 +613,41 @@ void order_mod() {
 
             while (a == 0) {
 
-                printf("1. »óÇ°¸í\n");
-                printf("2. ÁÖ¹®ÀÚ¸í\n");
+                printf("1. ìƒí’ˆëª…\n");
+                printf("2. ì£¼ë¬¸ìëª…\n");
                 printf("3. id\n");
-                printf("4. ¼ö·®\n");
-                printf("¼öÁ¤ÇÒ ºÎºĞÀ» ¼±ÅÃÇØÁÖ¼¼¿ä: \n");
+                printf("4. ìˆ˜ëŸ‰\n");
+                printf("ìˆ˜ì •í•  ë¶€ë¶„ì„ ì„ íƒí•´ì£¼ì„¸ìš”: \n");
                 scanf("%d", &select);
 
                 switch (select) {
 
                 case 1:
-                    printf("»óÇ°¸íÀ» ¼öÁ¤ÇØÁÖ¼¼¿ä: ");
+                    printf("ìƒí’ˆëª…ì„ ìˆ˜ì •í•´ì£¼ì„¸ìš”: ");
                     scanf("%s", Order_list[i].p_name);
                     a = 1;
                     break;
 
                 case 2:
-                    printf("ÁÖ¹®ÀÚ¸íÀ» ¼öÁ¤ÇØÁÖ¼¼¿ä: ");
+                    printf("ì£¼ë¬¸ìëª…ì„ ìˆ˜ì •í•´ì£¼ì„¸ìš”: ");
                     scanf("%s", Order_list[i].cli_name);
                     a = 1;
                     break;
 
                 case 3:
-                    printf("id¸¦ ¼öÁ¤ÇØÁÖ¼¼¿ä: ");
+                    printf("idë¥¼ ìˆ˜ì •í•´ì£¼ì„¸ìš”: ");
                     scanf("%d", &Order_list[i].id);
                     a = 1;
                     break;
 
                 case 4:
-                    printf("»óÇ° Àç°í¸¦ ¼öÁ¤ÇØÁÖ¼¼¿ä: ");
+                    printf("ìƒí’ˆ ì¬ê³ ë¥¼ ìˆ˜ì •í•´ì£¼ì„¸ìš”: ");
                     scanf("%d", &(Order_list[i].quantity));
                     a = 1;
                     break;
 
                 default:
-                    printf("¸Ş´º¿¡ ¾ø´Â ¹øÈ£ ÀÔ´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.\n");
+                    printf("ë©”ë‰´ì— ì—†ëŠ” ë²ˆí˜¸ ì…ë‹ˆë‹¤. ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”.\n");
                 }
                 if (a == 1) break;
             }
@@ -655,24 +655,24 @@ void order_mod() {
         }
     }
     if (!found) {
-        printf("idÀ» Ã£À» ¼ö ¾ø½À´Ï´Ù.\n\n");
+        printf("idì„ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n\n");
     }
     save_list(3);
 }
 
-// ÁÖ¹® Á¤º¸ »èÁ¦
+// ì£¼ë¬¸ ì •ë³´ ì‚­ì œ
 void order_del() {
 
     int num = 1;
     int order_id;
 
     if (num_order == 0) {
-        printf("»èÁ¦ÇÒ ÁÖ¹®ÀÌ ¾ø½À´Ï´Ù.\n\n");
+        printf("ì‚­ì œí•  ì£¼ë¬¸ì´ ì—†ìŠµë‹ˆë‹¤.\n\n");
         return;
     }
 
-    printf("ÁÖ¹® »èÁ¦\n");
-    printf("»èÁ¦ÇÒ id¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä: ");
+    printf("ì£¼ë¬¸ ì‚­ì œ\n");
+    printf("ì‚­ì œí•  idë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”: ");
     scanf("%d", &order_id);
 
     int found = 0;
@@ -680,7 +680,7 @@ void order_del() {
         if (Order_list[i].id == order_id) {
             found = 1;
 
-            // »èÁ¦ÇÒ ÁÖ¹® ÀÌÈÄÀÇ ÁÖ¹®µéÀ» ÇÑ Ä­¾¿ ¾ÕÀ¸·Î ÀÌµ¿
+            // ì‚­ì œí•  ì£¼ë¬¸ ì´í›„ì˜ ì£¼ë¬¸ë“¤ì„ í•œ ì¹¸ì”© ì•ìœ¼ë¡œ ì´ë™
 
             for (int j = i; j < num_order - 1; j++) {
                 Order_list[j] = Order_list[j + 1];
@@ -688,22 +688,22 @@ void order_del() {
             num_order--;
             Order_list = (struct order*)realloc(Order_list, sizeof(struct order) * num_order);
             if (Order_list == NULL) {
-                printf("order_list¿¡ ¸Ş¸ğ¸® ÀçÇÒ´çÀ» ½ÇÆĞ ÇÏ¿´½À´Ï´Ù.");
+                printf("order_listì— ë©”ëª¨ë¦¬ ì¬í• ë‹¹ì„ ì‹¤íŒ¨ í•˜ì˜€ìŠµë‹ˆë‹¤.");
                 free(Order_list);
                 exit(1);
             }
-            printf("ÁÖ¹®ÀÌ »èÁ¦µÇ¾ú½À´Ï´Ù.\n\n");
+            printf("ì£¼ë¬¸ì´ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.\n\n");
             break;
         }
     }
 
     if (!found) {
-        printf("ÁÖ¹®À» Ã£À» ¼ö ¾ø½À´Ï´Ù.\n\n");
+        printf("ì£¼ë¬¸ì„ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n\n");
     }
     save_list(3);
 }
 
-//»óÇ° °Ë»ö
+//ìƒí’ˆ ê²€ìƒ‰
 void product_search_manage() {
 
     char search_t[20];
@@ -711,11 +711,11 @@ void product_search_manage() {
 
     while (1) {
         printf("----------------------------\n\n");
-        printf("°Ë»öÇÒ Ç×¸ñÀ» ¼±ÅÃÇØÁÖ¼¼¿ä\n\n");
-        printf("0. ¸Ş´º·Î µ¹¾Æ°¡±â\n");
-        printf("1. »óÇ°¸í\n");
-        printf("2. »óÇ° °¡°İ\n");
-        printf("ÀÔ·Â: ");
+        printf("ê²€ìƒ‰í•  í•­ëª©ì„ ì„ íƒí•´ì£¼ì„¸ìš”\n\n");
+        printf("0. ë©”ë‰´ë¡œ ëŒì•„ê°€ê¸°\n");
+        printf("1. ìƒí’ˆëª…\n");
+        printf("2. ìƒí’ˆ ê°€ê²©\n");
+        printf("ì…ë ¥: ");
         scanf("%d", &choice);
 
         switch (choice) {
@@ -724,7 +724,7 @@ void product_search_manage() {
             return;
 
         case 1:
-            printf("\n°Ë»öÇÒ »óÇ°¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä: ");
+            printf("\nê²€ìƒ‰í•  ìƒí’ˆëª…ì„ ì…ë ¥í•´ì£¼ì„¸ìš”: ");
             scanf("%s", search_t);
             for (int i = 0; i < num_product; i++) {
                 if (strcmp(Product_list[i].name, search_t) == 0) {
@@ -733,14 +733,14 @@ void product_search_manage() {
 
                 }
             }
-            if (!found) printf("°Ë»ö °á°ú°¡ ¾ø½À´Ï´Ù.\n\n");
+            if (!found) printf("ê²€ìƒ‰ ê²°ê³¼ê°€ ì—†ìŠµë‹ˆë‹¤.\n\n");
 
             found = 0;
 
             break;
 
         case 2:
-            printf("\n°Ë»öÇÒ °¡°İÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä: ");
+            printf("\nê²€ìƒ‰í•  ê°€ê²©ì„ ì…ë ¥í•´ì£¼ì„¸ìš”: ");
             scanf("%d", &s_price);
             for (int i = 0; i < num_product; i++) {
                 if (Product_list[i].price == s_price) {
@@ -748,14 +748,14 @@ void product_search_manage() {
                     product_search_print(i);
                 }
             }
-            if (!found) printf("\n°Ë»ö °á°ú°¡ ¾ø½À´Ï´Ù.\n\n");
+            if (!found) printf("\nê²€ìƒ‰ ê²°ê³¼ê°€ ì—†ìŠµë‹ˆë‹¤.\n\n");
 
             found = 0;
 
             break;
 
         default:
-            printf("\nÀß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.\n\n");
+            printf("\nì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤. ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”.\n\n");
             break;
         }
 
@@ -764,7 +764,7 @@ void product_search_manage() {
 }
 
 
-//°í°´ °Ë»ö
+//ê³ ê° ê²€ìƒ‰
 void client_search_manage() {
 
     char search_t[20];
@@ -772,12 +772,12 @@ void client_search_manage() {
 
     while (1) {
         printf("----------------------------\n\n");
-        printf("\n°Ë»öÇÒ Ç×¸ñÀ» ¼±ÅÃÇØÁÖ¼¼¿ä\n\n");
-        printf("0. ¸Ş´º·Î µ¹¾Æ°¡±â\n");
-        printf("1. °í°´¸í\n");
-        printf("2. °í°´ ÁÖ¼Ò\n");
-        printf("3. ÀüÈ­ ¹øÈ£\n");
-        printf("ÀÔ·Â: ");
+        printf("\nê²€ìƒ‰í•  í•­ëª©ì„ ì„ íƒí•´ì£¼ì„¸ìš”\n\n");
+        printf("0. ë©”ë‰´ë¡œ ëŒì•„ê°€ê¸°\n");
+        printf("1. ê³ ê°ëª…\n");
+        printf("2. ê³ ê° ì£¼ì†Œ\n");
+        printf("3. ì „í™” ë²ˆí˜¸\n");
+        printf("ì…ë ¥: ");
         scanf("%d", &choice);
 
         switch (choice) {
@@ -786,7 +786,7 @@ void client_search_manage() {
             return;
 
         case 1:
-            printf("\n°Ë»öÇÒ °í°´¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä: ");
+            printf("\nê²€ìƒ‰í•  ê³ ê°ëª…ì„ ì…ë ¥í•´ì£¼ì„¸ìš”: ");
             scanf("%s", search_t);
             for (int i = 0; i < num_client; i++) {
                 if (strcmp(Client_list[i].name, search_t) == 0) {
@@ -794,14 +794,14 @@ void client_search_manage() {
                     clilent_search_print(i);
                 }
             }
-            if (!found) printf("\n°Ë»ö °á°ú°¡ ¾ø½À´Ï´Ù.\n\n");
+            if (!found) printf("\nê²€ìƒ‰ ê²°ê³¼ê°€ ì—†ìŠµë‹ˆë‹¤.\n\n");
 
             found = 0;
 
             break;
 
         case 2:
-            printf("\n°Ë»öÇÒ ÁÖ¼Ò¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä: ");
+            printf("\nê²€ìƒ‰í•  ì£¼ì†Œë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”: ");
             scanf("%s", search_t);
             for (int i = 0; i < num_client; i++) {
                 if (strcmp(Client_list[i].adress, search_t) == 0) {
@@ -809,14 +809,14 @@ void client_search_manage() {
                     clilent_search_print(i);
                 }
             }
-            if (!found) printf("\n°Ë»ö °á°ú°¡ ¾ø½À´Ï´Ù.\n\n");
+            if (!found) printf("\nê²€ìƒ‰ ê²°ê³¼ê°€ ì—†ìŠµë‹ˆë‹¤.\n\n");
 
             found = 0;
 
             break;
 
         case 3:
-            printf("\n°Ë»öÇÒ ÀüÈ­¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä: ");
+            printf("\nê²€ìƒ‰í•  ì „í™”ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”: ");
             scanf("%s", search_t);
             for (int i = 0; i < num_client; i++) {
                 if (strcmp(Client_list[i].phone, search_t) == 0) {
@@ -824,14 +824,14 @@ void client_search_manage() {
                     clilent_search_print(i);
                 }
             }
-            if (!found) printf("\n°Ë»ö °á°ú°¡ ¾ø½À´Ï´Ù.\n\n");
+            if (!found) printf("\nê²€ìƒ‰ ê²°ê³¼ê°€ ì—†ìŠµë‹ˆë‹¤.\n\n");
 
             found = 0;
 
             break;
 
         default:
-            printf("\nÀß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù. ´Ù½ÃÀÔ·ÂÇØÁÖ¼¼¿ä.\n\n");
+            printf("\nì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤. ë‹¤ì‹œì…ë ¥í•´ì£¼ì„¸ìš”.\n\n");
             break;
         }
     }
@@ -840,7 +840,7 @@ void client_search_manage() {
 
 
 
-//ÁÖ¹® °Ë»ö
+//ì£¼ë¬¸ ê²€ìƒ‰
 void order_search_manage() {
 
     char search_t[20];
@@ -848,13 +848,13 @@ void order_search_manage() {
 
     while (1) {
         printf("----------------------------\n\n");
-        printf("\n°Ë»öÇÒ Ç×¸ñÀ» ¼±ÅÃÇØÁÖ¼¼¿ä\n\n");
-        printf("0. ¸Ş´º·Î µ¹¾Æ°¡±â\n");
-        printf("1. »óÇ°¸í\n");
-        printf("2. ÁÖ¹®ÀÚ\n");
-        printf("3. ÁÖ¹® ³¯Â¥\n");
-        printf("4. ÁÖ¹® id\n");
-        printf("ÀÔ·Â: ");
+        printf("\nê²€ìƒ‰í•  í•­ëª©ì„ ì„ íƒí•´ì£¼ì„¸ìš”\n\n");
+        printf("0. ë©”ë‰´ë¡œ ëŒì•„ê°€ê¸°\n");
+        printf("1. ìƒí’ˆëª…\n");
+        printf("2. ì£¼ë¬¸ì\n");
+        printf("3. ì£¼ë¬¸ ë‚ ì§œ\n");
+        printf("4. ì£¼ë¬¸ id\n");
+        printf("ì…ë ¥: ");
         scanf("%d", &choice);
 
         switch (choice) {
@@ -863,7 +863,7 @@ void order_search_manage() {
             return;
 
         case 1:
-            printf("\n°Ë»öÇÒ »óÇ°¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä: ");
+            printf("\nê²€ìƒ‰í•  ìƒí’ˆëª…ì„ ì…ë ¥í•´ì£¼ì„¸ìš”: ");
             scanf("%s", search_t);
             for (int i = 0; i < num_order; i++) {
                 if (strcmp(Order_list[i].p_name, search_t) == 0) {
@@ -871,14 +871,14 @@ void order_search_manage() {
                     order_search_print(i);
                 }
             }
-            if (!found) printf("\n°Ë»ö °á°ú°¡ ¾ø½À´Ï´Ù.\n\n");
+            if (!found) printf("\nê²€ìƒ‰ ê²°ê³¼ê°€ ì—†ìŠµë‹ˆë‹¤.\n\n");
 
             found = 0;
 
             break;
 
         case 2:
-            printf("\n°Ë»öÇÒ ÁÖ¹®ÀÚ¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä: ");
+            printf("\nê²€ìƒ‰í•  ì£¼ë¬¸ìëª…ì„ ì…ë ¥í•´ì£¼ì„¸ìš”: ");
             scanf("%s", search_t);
             for (int i = 0; i < num_order; i++) {
                 if (strcmp(Order_list[i].cli_name, search_t) == 0) {
@@ -886,14 +886,14 @@ void order_search_manage() {
                     order_search_print(i);
                 }
             }
-            if (!found) printf("\n°Ë»ö °á°ú°¡ ¾ø½À´Ï´Ù.\n\n");
+            if (!found) printf("\nê²€ìƒ‰ ê²°ê³¼ê°€ ì—†ìŠµë‹ˆë‹¤.\n\n");
 
             found = 0;
 
             break;
 
         case 3:
-            printf("°Ë»öÇÒ ÁÖ¹® ³¯Â¥¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä: ");
+            printf("ê²€ìƒ‰í•  ì£¼ë¬¸ ë‚ ì§œë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”: ");
             scanf("%s", search_t);
             for (int i = 0; i < num_order; i++) {
                 if (strcmp(Order_list[i].date, search_t) == 0) {
@@ -901,14 +901,14 @@ void order_search_manage() {
                     order_search_print(i);
                 }
             }
-            if (!found) printf("\n°Ë»ö °á°ú°¡ ¾ø½À´Ï´Ù.\n\n");
+            if (!found) printf("\nê²€ìƒ‰ ê²°ê³¼ê°€ ì—†ìŠµë‹ˆë‹¤.\n\n");
 
             found = 0;
 
             break;
 
         case 4:
-            printf("°Ë»öÇÒ ÁÖ¹® id¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä: ");
+            printf("ê²€ìƒ‰í•  ì£¼ë¬¸ idë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”: ");
             scanf("%d", &isearch_t);
             for (int i = 0; i < num_order; i++) {
                 if (Order_list[i].id == isearch_t) {
@@ -916,7 +916,7 @@ void order_search_manage() {
                     order_search_print(i);
                 }
             }
-            if (!found) printf("\n°Ë»ö °á°ú°¡ ¾ø½À´Ï´Ù.\n\n");
+            if (!found) printf("\nê²€ìƒ‰ ê²°ê³¼ê°€ ì—†ìŠµë‹ˆë‹¤.\n\n");
 
             found = 0;
 
@@ -924,7 +924,7 @@ void order_search_manage() {
 
 
         default:
-            printf("\nÀß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.\n\n");
+            printf("\nì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤. ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”.\n\n");
             break;
         }
 
@@ -935,61 +935,61 @@ void order_search_manage() {
 
 
 
-//¸ñ·Ï Ãâ·Â
+//ëª©ë¡ ì¶œë ¥
 void list_print(int num) {
 
     switch (num) {
 
     case 1:
-        printf("»óÇ° ¸ñ·Ï\n\n");
+        printf("ìƒí’ˆ ëª©ë¡\n\n");
         printf("----------------------------\n\n");
         for (int i = 0; i < num_product; i++) {
-            printf("»óÇ°¸í: %s\n", Product_list[i].name);
-            printf("°¡°İ: %d\n\n", Product_list[i].price);
+            printf("ìƒí’ˆëª…: %s\n", Product_list[i].name);
+            printf("ê°€ê²©: %d\n\n", Product_list[i].price);
             printf("----------------------------\n\n");
         }
         break;
 
     case 2:
-        printf("°í°´ ¸ñ·Ï\n\n");
+        printf("ê³ ê° ëª©ë¡\n\n");
         printf("----------------------------\n\n");
         for (int i = 0; i < num_client; i++) {
-            printf("»óÇ°¸í: %s\n", Client_list[i].name);
-            printf("ÁÖ¼Ò: %s\n", Client_list[i].adress);
-            printf("ÈŞ´ëÀüÈ­: %s\n\n", Client_list[i].phone);
+            printf("ìƒí’ˆëª…: %s\n", Client_list[i].name);
+            printf("ì£¼ì†Œ: %s\n", Client_list[i].adress);
+            printf("íœ´ëŒ€ì „í™”: %s\n\n", Client_list[i].phone);
             printf("----------------------------\n\n");
         }
         break;
 
     case 3:
-        printf("ÁÖ¹® ¸ñ·Ï\n\n");
+        printf("ì£¼ë¬¸ ëª©ë¡\n\n");
         printf("----------------------------\n\n");
         for (int i = 0; i < num_order; i++) {
-            printf("ÁÖ¹® id: %d\n", Order_list[i].id);
-            printf("»óÇ°¸í: %s\n", Order_list[i].p_name);
-            printf("ÁÖ¹®ÀÚ¸í: %s\n", Order_list[i].cli_name);
-            printf("³¯Â¥: %s\n", Order_list[i].date);
-            printf("ÁÖ¹® ¼ö·®: %d\n\n", Order_list[i].quantity);
+            printf("ì£¼ë¬¸ id: %d\n", Order_list[i].id);
+            printf("ìƒí’ˆëª…: %s\n", Order_list[i].p_name);
+            printf("ì£¼ë¬¸ìëª…: %s\n", Order_list[i].cli_name);
+            printf("ë‚ ì§œ: %s\n", Order_list[i].date);
+            printf("ì£¼ë¬¸ ìˆ˜ëŸ‰: %d\n\n", Order_list[i].quantity);
             printf("----------------------------\n\n");
         }
         break;
     }
 
-}// ÅëÇÕ
+}// í†µí•©
 
-//°ü¸® ¸Ş´º
+//ê´€ë¦¬ ë©”ë‰´
 void product_manage() {
     int choice;
 
     while (1) {
         printf("----------------------------\n\n");
-        printf("1. »óÇ° Ãß°¡ ¸Ş´º\n");
-        printf("2. »óÇ° ¼öÁ¤ ¸Ş´º\n");
-        printf("3. »óÇ° »èÁ¦ ¸Ş´º\n");
-        printf("4. »óÇ° ¸ñ·Ï Ãâ·Â\n");
-        printf("5. ¸Ş´º·Î µ¹¾Æ°¡±â\n");
-        printf("0. Á¾·á\n");
-        printf("¸Ş´º¸¦ ¼±ÅÃÇÏ¼¼¿ä: ");
+        printf("1. ìƒí’ˆ ì¶”ê°€ ë©”ë‰´\n");
+        printf("2. ìƒí’ˆ ìˆ˜ì • ë©”ë‰´\n");
+        printf("3. ìƒí’ˆ ì‚­ì œ ë©”ë‰´\n");
+        printf("4. ìƒí’ˆ ëª©ë¡ ì¶œë ¥\n");
+        printf("5. ë©”ë‰´ë¡œ ëŒì•„ê°€ê¸°\n");
+        printf("0. ì¢…ë£Œ\n");
+        printf("ë©”ë‰´ë¥¼ ì„ íƒí•˜ì„¸ìš”: ");
         scanf("%d", &choice);
 
         switch (choice) {
@@ -1015,7 +1015,7 @@ void product_manage() {
             return;
 
         default:
-            printf("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.\n");
+            printf("ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤. ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”.\n");
             break;
         }
     }
@@ -1026,13 +1026,13 @@ void client_manage() {
 
     while (1) {
         printf("----------------------------\n\n");
-        printf("1. °í°´ Ãß°¡ ¸Ş´º\n");
-        printf("2. °í°´ ¼öÁ¤ ¸Ş´º\n");
-        printf("3. °í°´ »èÁ¦ ¸Ş´º\n");
-        printf("4. °í°´ ¸ñ·Ï Ãâ·Â\n");
-        printf("5. ¸Ş´º·Î µ¹¾Æ°¡±â\n");
-        printf("0. Á¾·á\n");
-        printf("¸Ş´º¸¦ ¼±ÅÃÇÏ¼¼¿ä: ");
+        printf("1. ê³ ê° ì¶”ê°€ ë©”ë‰´\n");
+        printf("2. ê³ ê° ìˆ˜ì • ë©”ë‰´\n");
+        printf("3. ê³ ê° ì‚­ì œ ë©”ë‰´\n");
+        printf("4. ê³ ê° ëª©ë¡ ì¶œë ¥\n");
+        printf("5. ë©”ë‰´ë¡œ ëŒì•„ê°€ê¸°\n");
+        printf("0. ì¢…ë£Œ\n");
+        printf("ë©”ë‰´ë¥¼ ì„ íƒí•˜ì„¸ìš”: ");
         scanf("%d", &choice);
 
         switch (choice) {
@@ -1058,7 +1058,7 @@ void client_manage() {
             return;
 
         default:
-            printf("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.\n");
+            printf("ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤. ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”.\n");
             break;
         }
     }
@@ -1069,13 +1069,13 @@ void order_manage() {
 
     while (1) {
         printf("----------------------------\n\n");
-        printf("1. ÁÖ¹® Ãß°¡ ¸Ş´º\n");
-        printf("2. ÁÖ¹® ¼öÁ¤ ¸Ş´º\n");
-        printf("3. ÁÖ¹® »èÁ¦ ¸Ş´º\n");
-        printf("4. ÁÖ¹® ¸ñ·Ï Ãâ·Â\n");
-        printf("5. ¸Ş´º·Î µ¹¾Æ°¡±â\n");
-        printf("0. Á¾·á\n");
-        printf("¸Ş´º¸¦ ¼±ÅÃÇÏ¼¼¿ä: ");
+        printf("1. ì£¼ë¬¸ ì¶”ê°€ ë©”ë‰´\n");
+        printf("2. ì£¼ë¬¸ ìˆ˜ì • ë©”ë‰´\n");
+        printf("3. ì£¼ë¬¸ ì‚­ì œ ë©”ë‰´\n");
+        printf("4. ì£¼ë¬¸ ëª©ë¡ ì¶œë ¥\n");
+        printf("5. ë©”ë‰´ë¡œ ëŒì•„ê°€ê¸°\n");
+        printf("0. ì¢…ë£Œ\n");
+        printf("ë©”ë‰´ë¥¼ ì„ íƒí•˜ì„¸ìš”: ");
         scanf("%d", &choice);
 
         switch (choice) {
@@ -1101,7 +1101,7 @@ void order_manage() {
             return;
 
         default:
-            printf("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.\n");
+            printf("ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤. ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”.\n");
             break;
         }
     }
@@ -1112,12 +1112,12 @@ void manage() {
 
     while (1) {
         printf("----------------------------\n\n");
-        printf("1. »óÇ° ¸Ş´º\n");
-        printf("2. °í°´ ¸Ş´º\n");
-        printf("3. ÁÖ¹® ¸Ş´º\n");
-        printf("4. °Ë»ö ¸Ş´º\n");
-        printf("0. Á¾·á\n");
-        printf("¸Ş´º¸¦ ¼±ÅÃÇÏ¼¼¿ä: ");
+        printf("1. ìƒí’ˆ ë©”ë‰´\n");
+        printf("2. ê³ ê° ë©”ë‰´\n");
+        printf("3. ì£¼ë¬¸ ë©”ë‰´\n");
+        printf("4. ê²€ìƒ‰ ë©”ë‰´\n");
+        printf("0. ì¢…ë£Œ\n");
+        printf("ë©”ë‰´ë¥¼ ì„ íƒí•˜ì„¸ìš”: ");
         scanf("%d", &choice);
 
         switch (choice) {
@@ -1137,9 +1137,10 @@ void manage() {
 
         case 4:
             search_manage();
+            break;
 
         default:
-            printf("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.\n");
+            printf("ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤. ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”.\n");
             break;
         }
     }
@@ -1151,12 +1152,12 @@ void search_manage() {
 
     while (1) {
         printf("----------------------------\n\n");
-        printf("°Ë»ö ÇÒ Á¤º¸¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä\n");
-        printf("0. ¸Ş´º·Î µ¹¾Æ°¡±â\n");
-        printf("1. »óÇ° Á¤º¸\n");
-        printf("2. °í°´ Á¤º¸\n");
-        printf("3. ÁÖ¹® Á¤º¸\n");
-        printf("ÀÔ·Â: ");
+        printf("ê²€ìƒ‰ í•  ì •ë³´ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”\n");
+        printf("0. ë©”ë‰´ë¡œ ëŒì•„ê°€ê¸°\n");
+        printf("1. ìƒí’ˆ ì •ë³´\n");
+        printf("2. ê³ ê° ì •ë³´\n");
+        printf("3. ì£¼ë¬¸ ì •ë³´\n");
+        printf("ì…ë ¥: ");
         scanf("%d", &choice);
 
         switch (choice) {
@@ -1177,7 +1178,7 @@ void search_manage() {
             break;
 
         default:
-            printf("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+            printf("ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤. ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”.");
             break;
         }
     }
